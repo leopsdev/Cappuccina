@@ -1,0 +1,6 @@
+def somadobro(x,y) = soma(soma(x,y),soma(x,y));
+def triplo(x) = soma(soma(x,x),x);
+
+main(){
+    print(soma(1,2));
+}
