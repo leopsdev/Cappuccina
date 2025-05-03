@@ -5,6 +5,5 @@ A cappucinna é uma linguagem de programação para a matéria de compiladores, 
 
 ## Compilar e usar :)
 
-'''
-teste
-'''
+<pre> ``` bison -d parser.y        # Gera parser.tab.c e parser.tab.h
+flex scanner.l           # Gera lex.yy.c  ``` </pre>
