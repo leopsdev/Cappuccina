@@ -788,55 +788,58 @@ YY_RULE_SETUP
 case 9:
 YY_RULE_SETUP
 #line 17 "scanner.l"
-{ return NUM; }
+{ 
+    yylval.num = atoi(yytext);
+    return NUM; 
+}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 18 "scanner.l"
+#line 21 "scanner.l"
 { return ABRE_P; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 19 "scanner.l"
+#line 22 "scanner.l"
 { return FECHA_P; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 20 "scanner.l"
+#line 23 "scanner.l"
 { return ABRE_CO; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 21 "scanner.l"
+#line 24 "scanner.l"
 { return FECHA_CO; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 22 "scanner.l"
+#line 25 "scanner.l"
 { return VIRG; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 23 "scanner.l"
+#line 26 "scanner.l"
 { return P_VIRG; }
 	YY_BREAK
 case 16:
 /* rule 16 can match eol */
 YY_RULE_SETUP
-#line 24 "scanner.l"
+#line 27 "scanner.l"
 ; // ignora espaços
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 26 "scanner.l"
+#line 29 "scanner.l"
 { return *yytext; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 27 "scanner.l"
+#line 30 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 840 "lex.yy.c"
+#line 843 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1841,7 +1844,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 27 "scanner.l"
+#line 30 "scanner.l"
 
 
 

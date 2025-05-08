@@ -14,7 +14,9 @@ u                   { return U; }
 def                 { return DEF; }
 soma                { return SOMA; }
 [a-zA-Z_][a-zA-Z0-9_]*   { yylval.str = strdup(yytext); return IDENT; }
-[0-9]+              { return NUM; }
+[0-9]+              { yylval.num = atoi(yytext);
+                    return NUM; 
+                    }
 "("                 { return ABRE_P; }
 ")"                 { return FECHA_P; }
 "["                 { return ABRE_CO; }

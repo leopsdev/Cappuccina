@@ -48,6 +48,7 @@ lista_comandos:
 
 comando:
     PRINT ABRE_P expressao FECHA_P P_VIRG {
+        printf("Tipo da expressão: %d\n", $3->tipo);
         int resultado = avaliar($3);
         printf("Resultado: %d\n", resultado);
     }
@@ -63,6 +64,7 @@ definicao:
         printf("Função '%s' definida com sucesso.\n", $2);
     }
     ;
+
 
 parametros:
     IDENT
@@ -84,31 +86,6 @@ expressao:
 
 %%
 
-int avaliar(Expressao* expr) {
-    switch (expr->tipo) {
-        case T_NUM:
-            return expr->valor_num;
-        case T_SOMA:
-            return avaliar(expr->binaria.e1) + avaliar(expr->binaria.e2);
-        case T_N:
-            return 0;
-        case T_S:
-            return avaliar(expr->unica) + 1;
-        case T_U:
-            // U(n, x): retorna x se n == 0
-            if (avaliar(expr->binaria.e1) == 0)
-                return avaliar(expr->binaria.e2);
-            else
-                return 0; // ou erro
-        case T_IDENT:
-            // Aqui, busque o valor do identificador (parâmetro, etc)
-            return 0; // placeholder
-        case T_CALL:
-            // Aqui, busque a função definida e avalie seu corpo com os argumentos
-            return 0; // placeholder
-    }
-    return 0;
-}
 
 void yyerror(const char *s) {
     fprintf(stderr, "Erro: %s\n", s);

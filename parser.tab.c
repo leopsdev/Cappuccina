@@ -523,8 +523,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    33,    33,    37,    41,    45,    46,    50,    57,    58,
-      62,    68,    69,    73,    74,    75,    76,    77,    80
+       0,    33,    33,    37,    41,    45,    46,    50,    58,    59,
+      63,    69,    70,    74,    75,    76,    77,    78,    81
 };
 #endif
 
@@ -1113,62 +1113,63 @@ yyreduce:
   case 7: /* comando: PRINT ABRE_P expressao FECHA_P P_VIRG  */
 #line 50 "parser.y"
                                           {
+        printf("Tipo da expressão: %d\n", (yyvsp[-2].expr)->tipo);
         int resultado = avaliar((yyvsp[-2].expr));
         printf("Resultado: %d\n", resultado);
     }
-#line 1120 "parser.tab.c"
+#line 1121 "parser.tab.c"
     break;
 
   case 10: /* definicao: DEF IDENT ABRE_P parametros FECHA_P '=' expressao P_VIRG  */
-#line 62 "parser.y"
+#line 63 "parser.y"
                                                              {
         printf("Função '%s' definida com sucesso.\n", (yyvsp[-6].str));
     }
-#line 1128 "parser.tab.c"
+#line 1129 "parser.tab.c"
     break;
 
   case 13: /* expressao: NUM  */
-#line 73 "parser.y"
+#line 74 "parser.y"
         { (yyval.expr) = nova_expr_num((yyvsp[0].num)); }
-#line 1134 "parser.tab.c"
+#line 1135 "parser.tab.c"
     break;
 
   case 14: /* expressao: IDENT  */
-#line 74 "parser.y"
+#line 75 "parser.y"
             { (yyval.expr) = nova_expr_ident((yyvsp[0].str)); }
-#line 1140 "parser.tab.c"
+#line 1141 "parser.tab.c"
     break;
 
   case 15: /* expressao: N  */
-#line 75 "parser.y"
+#line 76 "parser.y"
         { (yyval.expr) = nova_expr_n(); }
-#line 1146 "parser.tab.c"
+#line 1147 "parser.tab.c"
     break;
 
   case 16: /* expressao: S ABRE_P expressao FECHA_P  */
-#line 76 "parser.y"
+#line 77 "parser.y"
                                  { (yyval.expr) = nova_expr_s((yyvsp[-1].expr)); }
-#line 1152 "parser.tab.c"
+#line 1153 "parser.tab.c"
     break;
 
   case 17: /* expressao: U ABRE_P expressao VIRG expressao FECHA_P  */
-#line 77 "parser.y"
+#line 78 "parser.y"
                                                 {
         (yyval.expr) = nova_expr_u((yyvsp[-3].expr), (yyvsp[-1].expr));
     }
-#line 1160 "parser.tab.c"
+#line 1161 "parser.tab.c"
     break;
 
   case 18: /* expressao: SOMA ABRE_P expressao VIRG expressao FECHA_P  */
-#line 80 "parser.y"
+#line 81 "parser.y"
                                                    {
         (yyval.expr) = nova_expr_soma((yyvsp[-3].expr), (yyvsp[-1].expr));
     }
-#line 1168 "parser.tab.c"
+#line 1169 "parser.tab.c"
     break;
 
 
-#line 1172 "parser.tab.c"
+#line 1173 "parser.tab.c"
 
       default: break;
     }
@@ -1361,34 +1362,9 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 85 "parser.y"
+#line 86 "parser.y"
 
 
-int avaliar(Expressao* expr) {
-    switch (expr->tipo) {
-        case T_NUM:
-            return expr->valor_num;
-        case T_SOMA:
-            return avaliar(expr->binaria.e1) + avaliar(expr->binaria.e2);
-        case T_N:
-            return 0;
-        case T_S:
-            return avaliar(expr->unica) + 1;
-        case T_U:
-            // U(n, x): retorna x se n == 0
-            if (avaliar(expr->binaria.e1) == 0)
-                return avaliar(expr->binaria.e2);
-            else
-                return 0; // ou erro
-        case T_IDENT:
-            // Aqui, busque o valor do identificador (parâmetro, etc)
-            return 0; // placeholder
-        case T_CALL:
-            // Aqui, busque a função definida e avalie seu corpo com os argumentos
-            return 0; // placeholder
-    }
-    return 0;
-}
 
 void yyerror(const char *s) {
     fprintf(stderr, "Erro: %s\n", s);
