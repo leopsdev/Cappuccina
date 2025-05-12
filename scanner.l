@@ -23,6 +23,8 @@ soma                { return SOMA; }
 "]"                 { return FECHA_CO; }
 ","                 { return VIRG; }
 ";"                 { return P_VIRG; }
+"{"                 { return PA_A;}
+"}"                 { return PA_F;}
 [ \t\n]+            ; // ignora espaços
 
 .                   { return *yytext; }

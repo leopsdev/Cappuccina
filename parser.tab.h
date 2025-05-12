@@ -73,8 +73,10 @@ extern int yydebug;
     FECHA_CO = 268,                /* FECHA_CO  */
     VIRG = 269,                    /* VIRG  */
     P_VIRG = 270,                  /* P_VIRG  */
-    IDENT = 271,                   /* IDENT  */
-    NUM = 272                      /* NUM  */
+    PA_A = 271,                    /* PA_A  */
+    PA_F = 272,                    /* PA_F  */
+    IDENT = 273,                   /* IDENT  */
+    NUM = 274                      /* NUM  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -88,9 +90,9 @@ union YYSTYPE
     char* str;
     int num;
     Expressao* expr;
-    
+    Expressao** vetor;
 
-#line 94 "parser.tab.h"
+#line 96 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
