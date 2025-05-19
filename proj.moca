@@ -1,0 +1,36 @@
+def soma(x, y) = rec(proj(1), succ(recproj(2)))
+
+def mult(x, y) = rec(zero(), soma(recproj(3), recproj(2)))
+
+def fatorial(x) = rec(succ(zero()), mult(recproj(2), succ(recproj(1))))
+
+def exponencial(x, y) = rec(succ(zero()), mult(recproj(3), recproj(2)))
+
+def pred(x) = rec(zero(), recproj(1))
+
+def diff(x, y) = rec(proj(1), pred(recproj(2)))
+
+def absdiff(x, y) = soma(diff(proj(1), proj(2)), diff(proj(2), proj(1)))
+
+def pot2(x) = rec(succ(zero()), mult(succ(succ(zero())), recproj(2)))
+
+def quadrado(x) = mult(proj(1), proj(1))
+
+def max(x, y) = soma(
+    mult(alpha(diff(proj(2), proj(1))), proj(1)),  
+    mult(alpha(diff(proj(1), proj(2))), proj(2))   
+)
+
+def alpha(x) = rec(succ(zero()), diff(succ(zero()), succ(recproj(1))))
+
+def alpha2(x) = alpha(alpha(proj(1)))
+
+def eq(x, y) = alpha(absdiff(proj(1), proj(2)))
+
+def leq(x, y) = alpha2(diff(proj(1), proj(2)))
+
+def geq(x, y) = alpha(diff(proj(1), proj(2)))
+
+
+
+def main(x) = leq(0, 3)
