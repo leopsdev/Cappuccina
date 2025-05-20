@@ -1,0 +1,22 @@
+{
+  "files.associations": {
+    "*.mocha": "textmate-scopes"
+  },
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "keyword.control.mocha",
+        "settings": {
+          "foreground": "#FF79C6",  // Rosa para palavras-chave
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "constant.numeric.mocha",
+        "settings": {
+          "foreground": "#BD93F9"   // Roxo para números
+        }
+      }
+    ]
+  }
+}
