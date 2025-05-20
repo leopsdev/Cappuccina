@@ -8,15 +8,13 @@ Faça o seguintes comando no terminal do linux ou WSL
 <pre>
 sudo apt update
 sudo apt install bison flex -y
-bison --version
-flex --version
+bison --version //verificar a instalação correta
+flex --version //verificar a instalação correta
 </pre>
 
 ## Compilar e usar :)
 
 <pre>
-bison -d parser.y        # Gera parser.tab.c e parser.tab.h
-flex scanner.l           # Gera lex.yy.c 
-gcc parser.tab.c lex.yy.c aux.c -o linguagem -lfl
-./linguagem < teste.txt
+make
+./capuccina < [nome do arquivo a ser compilado].moca
 </pre>
