@@ -6,7 +6,7 @@ YACC = bison -d
 
 
 # Nome do executável final
-TARGET = capuccina
+TARGET = cappuccina
 
 # Arquivos objeto
 OBJS = parser.tab.o lex.yy.o ast.o eval.o main.o
