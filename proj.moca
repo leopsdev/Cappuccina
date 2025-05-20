@@ -31,6 +31,4 @@ def leq(x, y) = alpha2(diff(proj(1), proj(2)))
 
 def geq(x, y) = alpha(diff(proj(1), proj(2)))
 
-
-
-def main(x) = leq(0, 3)
+def main(x) = soma(2,3)
