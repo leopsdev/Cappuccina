@@ -89,10 +89,5 @@ def aux_multiplo(x, y, z) = rec(
 
 def epar(x) = emultiplo(proj(1), inteiro(2))
 
-def main(x){
+def main(x) = pot2(5)
 
-}
-
-
-def algumacoisa(x) = mu_lim(teto, Predicado)
-def algumacoisa(x) = mu(Predicado)

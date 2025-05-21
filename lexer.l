@@ -16,7 +16,7 @@ DIGITO   [0-9]
 LETRA    [a-zA-Z]
 ID_FUN   [a-z][a-z0-9_]*     
 PRED     [A-Z][A-Z0-9_]*     
-ESPACO   [ \t\n]
+ESPACO   [ \t\r\n]
 
 %%
 
