@@ -1,1 +1,0 @@
-def soma(x,y) = rec(proj(1), succ(recproj(2)))

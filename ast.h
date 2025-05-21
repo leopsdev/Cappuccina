@@ -8,7 +8,8 @@ typedef enum {
     NO_PROJECAO,
     NO_RECPROJECAO,
     NO_RECURSAO,
-    NO_MINIMIZACAO,
+    NO_MU,
+    NO_MULIM,
     NO_PRIMITIVA,
     NO_PARAM,
     NO_ARG
@@ -44,11 +45,16 @@ typedef struct ASTNode {
             struct ASTNode* passo;
         } recursao;
         
-        // Para minimização (mu(pred) ou mu_lim(lim, pred))
         struct {
-            char* predicado;
-            struct ASTNode* limite;  // NULL se for mu ilimitado
-        } minimizacao;
+            char* nomeFuncao;
+            struct ASTNode* args;
+        } mu;
+
+        struct {
+            char* nomeFuncao;
+            struct ASTNode* args;
+            struct ASTNode* limite;
+        } mu_lim;
 
         struct {
             char* nome;               // "zero", "succ" ou "iszero"
@@ -70,8 +76,8 @@ ASTNode* criarNoChamada(char* nome, ASTNode* args);
 ASTNode* criarNoProjecao(int indice);
 ASTNode* criarNoRecProjecao(int indice);
 ASTNode* criarNoRecursao(ASTNode* base, ASTNode* passo);
-ASTNode* criarNoMinimizacao(char* predicado, ASTNode* limite);
-ASTNode* criarNoSoma(ASTNode* esq, ASTNode* dir);
+ASTNode* criarNoMinimizacaoLimitada(char* nomeFuncao, ASTNode* args, ASTNode* limite);
+ASTNode* criarNoMinimizacaoIlimitada(char* nomeFuncao, ASTNode* args);
 ASTNode* criarNoParam(char* nome);
 ASTNode* adicionarParam(ASTNode* lista, char* nome);
 ASTNode* criarNoArg(ASTNode* expr);

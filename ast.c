@@ -56,11 +56,20 @@ ASTNode* criarNoRecursao(ASTNode* base, ASTNode* passo) {
     return node;
 }
 
-ASTNode* criarNoMinimizacao(char* predicado, ASTNode* limite) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->tipo = NO_MINIMIZACAO;
-    node->minimizacao.predicado = strdup(predicado);
-    node->minimizacao.limite = limite;
+ASTNode* criarNoMinimizacaoIlimitada(char* nomeFuncao, ASTNode* args) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    node->tipo = NO_MU;
+    node->mu.nomeFuncao = strdup(nomeFuncao);
+    node->mu.args = args;  // args é lista de NO_ARG*
+    return node;
+}
+
+ASTNode* criarNoMinimizacaoLimitada(char* nomeFuncao, ASTNode* args, ASTNode* limite) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    node->tipo = NO_MULIM;
+    node->mu_lim.nomeFuncao = strdup(nomeFuncao);
+    node->mu_lim.args = args;
+    node->mu_lim.limite = limite;
     return node;
 }
 

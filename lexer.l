@@ -40,7 +40,7 @@ ESPACO   [ \t\r\n]
 ")"         { return FECHA_PAR; }
 ","         { return VIRGULA; }
 
-{ESPACO}+   ;
+{ESPACO}+   { /* Ignorar espaços em branco */ }
 
 .           { fprintf(stderr, "Caractere inválido: %s\n", yytext); }
 
