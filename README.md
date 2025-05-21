@@ -21,6 +21,6 @@ make
 ./capuccina < [nome do arquivo a ser compilado].moca
 </pre>
 
-# Uso da extensão ".mocha"
+## Uso da extensão ".mocha"
 
 Dentro da pasta mocha há um arquivo vsix, ao instalar ele como extensão no vscode os arquivos .mocha serão identificados automáticamente.
