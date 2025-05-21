@@ -16,7 +16,7 @@ DIGITO   [0-9]
 LETRA    [a-zA-Z]
 ID_FUN   [a-z][a-z0-9_]*     
 PRED     [A-Z][A-Z0-9_]*     
-ESPACO   [ \t\r\n]
+ESPACO   [ \t\n]
 
 %%
 
@@ -40,7 +40,7 @@ ESPACO   [ \t\r\n]
 ")"         { return FECHA_PAR; }
 ","         { return VIRGULA; }
 
-{ESPACO}+   ;
+{ESPACO}+   { /* Ignorar espaços em branco */ }
 
 .           { fprintf(stderr, "Caractere inválido: %s\n", yytext); }
 

@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define INT_MAX 1000000000
+
 // Tabela de funções do usuário
 typedef struct {
     char* nome;
@@ -42,29 +44,22 @@ int prim_proj(int* args, int num_args, int indice) {
         fprintf(stderr, "Erro: índice de projeção inválido\n");
         return 0;
     }
-    return args[indice - 1];
+    return args[num_args - indice];
 }
 
 int prim_recproj(int* args, int num_args, int indice) {
-    /* Formato dos args:
-       [0] = (y-1)
-       [1] = h(x1,...,xn, y-1)
-       [2...] = x1,...,xn
-    */
-    if (indice == 1) return args[0];  // (y-1)
-    if (indice == 2) return args[1];  // h(...)
-    if (indice >= 3) {
-        int x_index = indice - 3;
-        if (x_index < num_args - 2) {
-            return args[2 + x_index];  // x1, x2, etc.
-        }
+    // indice: 1-indexado
+    // args: [x_{n}-1, h(...), x1, x2, ..., x_{n-1}]
+    if (indice < 1 || indice > num_args) {
+        fprintf(stderr, "Erro: recproj(%d) inválido\n", indice);
+        return 0;
     }
-    fprintf(stderr, "Erro: recproj(%d) inválido\n", indice);
-    return 0;
+    return args[indice-1];
 }
 
 // Avaliação genérica
 int avaliar(ASTNode* node, int* args, int num_args) {
+    //printf("Tipo %d\n", node->tipo);
     switch (node->tipo) {
         case NO_NUMERO:
             return node->numero;
@@ -117,6 +112,56 @@ int avaliar(ASTNode* node, int* args, int num_args) {
                 fprintf(stderr, "Primitiva desconhecida: %s\n", node->primitiva.nome);
                 exit(1);
             }
+        
+        case NO_MU: {
+            const char* nomeFuncao = node->mu.nomeFuncao;
+            int x_args[16];
+            int n = 0;
+            ASTNode* atual = node->mu.args;
+            while (atual != NULL) {
+                x_args[n++] = avaliar(atual, args, num_args);
+                atual = atual->lista.proximo;
+            }
+
+            for (int z = 0; z < INT_MAX; z++) {
+                int args_completos[17];
+                memcpy(args_completos, x_args, n * sizeof(int));
+                args_completos[n] = z;
+
+                if (avaliarChamada(nomeFuncao, NULL, args_completos, n + 1) == 0) {
+                    return z;
+                }
+            }
+
+            fprintf(stderr, "Erro: minimização ilimitada não encontrou valor\n");
+            return 0;
+        }
+        
+        case NO_MULIM: {
+            const char* nomeFuncao = node->mu_lim.nomeFuncao;
+
+            int limite = avaliar(node->mu_lim.limite, args, num_args);
+
+            int x_args[16];
+            int n = 0;
+            ASTNode* atual = node->mu_lim.args;
+            while (atual != NULL) {
+                x_args[n++] = avaliar(atual, args, num_args);
+                atual = atual->lista.proximo;
+            }
+
+            for (int z = 0; z <= limite; z++) {
+                int args_completos[17];
+                memcpy(args_completos, x_args, n * sizeof(int));
+                args_completos[n] = z;
+
+                if (avaliarChamada(nomeFuncao, NULL, args_completos, n + 1) == 0) {
+                    return z;
+                }
+            }
+            fprintf(stderr, "Erro: minimização limitada não encontrou valor <= %d\n", limite);
+            return 0;
+        }
 
         case NO_CHAMADA:
             return avaliarChamada(node->chamada.nome, node->chamada.args, args, num_args);

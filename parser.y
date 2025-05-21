@@ -55,9 +55,11 @@ expressao:
     | REC ABRE_PAR expressao VIRGULA expressao FECHA_PAR {
         $$ = criarNoRecursao($3, $5);
     }
-    | MU ABRE_PAR PREDICADO FECHA_PAR { $$ = criarNoMinimizacao($3, NULL); }
-    | MU_LIM ABRE_PAR expressao VIRGULA PREDICADO FECHA_PAR {
-        $$ = criarNoMinimizacao($5, $3);
+    | MU ABRE_PAR ID_FUNCAO VIRGULA args FECHA_PAR {
+        $$ = criarNoMinimizacaoIlimitada($3, $5);
+    }
+    | MU_LIM ABRE_PAR expressao VIRGULA ID_FUNCAO VIRGULA args FECHA_PAR {
+        $$ = criarNoMinimizacaoLimitada($5, $7, $3);
     }
     | ABRE_PAR expressao FECHA_PAR { $$ = $2; }
     | ZERO ABRE_PAR FECHA_PAR           { $$ = criarNoPrimitiva("zero", NULL); }
