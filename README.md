@@ -2,7 +2,7 @@
 
 Cappuccina é uma linguagem de programação desenvolvida como parte da disciplina de **Compiladores**, com foco em **funções primitivas** e **μ-recursivas**. Seu principal objetivo é servir como **ferramenta pedagógica**, permitindo que estudantes explorem conceitos teóricos de forma prática e compreendam melhor a construção de um compilador.
 
-> 📚 Em breve, publicaremos um artigo explicando a construção da linguagem Cappuccina com todos os detalhes técnicos e pedagógicos envolvidos.
+> 📚 Em breve, publicaremos um artigo explicando a construção da linguagem Cappuccina com todos os detalhes técnicos e pedagógicos envolvidos: <https://docs.google.com/document/d/1Whajt53p7Gg_klY_zoSjm38cY_VgLhpD/edit>.
 
 ---
 
