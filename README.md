@@ -1,6 +1,4 @@
-![Texto alternativo](.vscode/icon/cappuccina.logo.banner)
-
-
+![Logo Cappuccina](.vscode/icons/cappuccina.logo.banner)
 
 # ☕ Cappuccina
 
