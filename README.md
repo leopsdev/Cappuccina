@@ -1,3 +1,7 @@
+![Texto alternativo](.vscode/icon/cappuccina.logo.banner)
+
+
+
 # ☕ Cappuccina
 
 Cappuccina é uma linguagem de programação desenvolvida como parte da disciplina de **Compiladores**, com foco em **funções primitivas** e **μ-recursivas**. Seu principal objetivo é servir como **ferramenta pedagógica**, permitindo que estudantes explorem conceitos teóricos de forma prática e compreendam melhor a construção de um compilador.
